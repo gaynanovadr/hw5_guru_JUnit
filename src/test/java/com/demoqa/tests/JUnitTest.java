@@ -44,8 +44,8 @@ public class JUnitTest {
 
     private static Stream<Arguments> navBarHeaderButtonsTextForDiffLanguages() {
         return Stream.of(
-                Arguments.of(Language.Deutsch, List.of("DamenHerrenKinder")),
-                Arguments.of(Language.English, List.of("WomenMenKids")
+                Arguments.of(Language.Deutsch, List.of("Damen", "Herren", "Kinder")),
+                Arguments.of(Language.English, List.of("Women", "Men", "Kids")
                 )
         );
     }
@@ -53,10 +53,10 @@ public class JUnitTest {
     @ParameterizedTest(name = "Check That On Header Nav Bar Button Texts Are Changing For Diff Language: {0}")
     void navBarHeaderButtonsTextForDiffLanguages(Language language, List<String> buttonsTexts) {
         $("[class=z-navicat-header_navToolLabel]").click();
-        $$("[class=z-navicat-header_modalLS_row1]").find(text(language.name())).click();
+        $$("[class=z-navicat-header_radioItem]").find(text(language.name())).click();
         $("[class=z-navicat-header_modalLS_actions]")
                 .$("button[class = 'z-navicat-header_buttonRoot z-navicat-header_buttonBase z-navicat-header_buttonPrimary z-navicat-header_buttonMedium']").click(); // withText("_buttonPrimary")).click();
-        $$(".z-navicat-header_genderList").filter(visible).shouldHave(CollectionCondition.texts(buttonsTexts));
+        $$(".z-navicat-header_genderItem").filter(visible).shouldHave(CollectionCondition.texts(buttonsTexts));
 
     }
 
